@@ -8,7 +8,7 @@
 * Step 2: User selects source node/cell
 * Step 3: User selects destination node/cell
 * Step 4: User chooses which algorithm to use BFS or DFS
-* Step 5: UI starts rendering
+* Step 5: Use user choosen algorithm to traverse from src to destination node.
 
 # UI example
 
