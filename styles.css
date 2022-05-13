@@ -1,0 +1,32 @@
+.heading{
+    color: burlywood;
+    display: flex;
+    justify-content: center;
+}
+.input-box{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+#gridsize{
+ margin-right: 1rem;
+}
+
+.grid{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5rem;
+  }
+  .gridContainer{
+    display: grid;
+    height: 500px;
+    width: 500px;
+  }
+  .gridItem{
+    display: inline-grid;
+    border: 0.1rem solid;
+    border-color: grey;
+  }
