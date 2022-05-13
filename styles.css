@@ -1,7 +1,8 @@
 .heading{
-    color: burlywood;
+    color: #4f46e5;
     display: flex;
     justify-content: center;
+    font-size: 3rem;
 }
 .input-box{
     display: flex;
