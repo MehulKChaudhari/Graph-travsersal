@@ -60,6 +60,9 @@ function findPath(src, destination, algorithm) {
     return;
   }
 
+  // Clear previous path highlights
+  clearPathHighlights();
+
   if (algorithm === "BFS") {
     path = bfs(src, destination, grid, gridSize);
   } else if (algorithm === "DFS") {
@@ -67,6 +70,14 @@ function findPath(src, destination, algorithm) {
   }
 
   highlightPath(path);
+}
+
+// Clear previous path highlights
+function clearPathHighlights() {
+  const gridItems = document.querySelectorAll(".gridItem");
+  gridItems.forEach((item) => {
+    item.style.backgroundColor = "";
+  });
 }
 
 // BFS algorithm implementation
@@ -98,17 +109,17 @@ function bfs(src, destination, grid, gridSize) {
   };
 
   while (queue.length > 0) {
-    const path = queue.shift();
-    const node = path[path.length - 1];
+    const path = queue.shift(); // remove the first path
+    const node = path[path.length - 1]; // Get the last node in the path
 
     if (node === destination) {
-      return path;
+      return path; // If we found the destination, return the path
     }
 
     for (const neighbor of getNeighbors(node)) {
       if (!visited.has(neighbor)) {
         visited.add(neighbor);
-        queue.push([...path, neighbor]);
+        queue.push([...path, neighbor]); // Enqueue the new path with this neighbor
       }
     }
   }
@@ -144,17 +155,17 @@ function dfs(src, destination, grid, gridSize) {
   };
 
   while (stack.length > 0) {
-    const path = stack.pop();
-    const node = path[path.length - 1];
+    const path = stack.pop(); // Pop the last path
+    const node = path[path.length - 1]; // Get the last node in the path
 
     if (node === destination) {
-      return path;
+      return path; // If we found the destination, return the path
     }
 
     if (!visited.has(node)) {
       visited.add(node);
       for (const neighbor of getNeighbors(node)) {
-        stack.push([...path, neighbor]);
+        stack.push([...path, neighbor]); // Push the new path with this neighbor
       }
     }
   }
@@ -162,24 +173,25 @@ function dfs(src, destination, grid, gridSize) {
   return [];
 }
 
-function highlightPath(path) {
+async function highlightPath(path) {
   if (path.length === 0) {
     alert("No path found.");
     return;
   }
 
-  path.forEach((id) => {
-    const gridItem = document.getElementById(id);
+  for (let i = 0; i < path.length; i++) {
+    const gridItem = document.getElementById(path[i]);
     if (gridItem) {
-      if (id === src) {
+      if (path[i] === src) {
         gridItem.style.backgroundColor = "#d0f4de";
-      } else if (id === destination) {
+      } else if (path[i] === destination) {
         gridItem.style.backgroundColor = "#f08080";
       } else {
         gridItem.style.backgroundColor = "#fcf6bd";
       }
+      await new Promise((resolve) => setTimeout(resolve, 500));
     }
-  });
+  }
 }
 
 const traverseButton = document.querySelector("#traverseButton");
